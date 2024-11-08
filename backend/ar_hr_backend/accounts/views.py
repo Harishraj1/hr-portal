@@ -223,37 +223,14 @@ def reset_password(request):
         candidate_collection.update_one({'email': email}, {'$set': {'password': hashed_password}})
         return JsonResponse({'message': "Password Reset Successfully"}, status=200)
     return JsonResponse({'message': 'Email not found'}, status=404)
-    
+
 @api_view(['GET'])
 def recent_jobs(request):
-    # Dummy static data for recent jobs
-    dummy_jobs = [
-        {
-            "id": 1,
-            "title": "Software Engineer",
-            "company": "TechCorp",
-            "location": "New York",
-            "description": "Develop and maintain software applications.",
-            "updated_at": "2024-11-07T10:00:00Z"
-        },
-        {
-            "id": 2,
-            "title": "Data Scientist",
-            "company": "Data Solutions",
-            "location": "San Francisco",
-            "description": "Analyze data and build predictive models.",
-            "updated_at": "2024-11-06T15:30:00Z"
-        },
-        {
-            "id": 3,
-            "title": "Project Manager",
-            "company": "BuildIt",
-            "location": "Chicago",
-            "description": "Oversee project timelines and deliverables.",
-            "updated_at": "2024-11-05T12:45:00Z"
-        },
-        # Add more dummy job data as needed
-    ]
+    # Fetch all jobs from the MongoDB 'jobs' collection
+    jobs_cursor = jobs_collection.find({})
+    
+    # Convert the cursor to a list and return it as JSON
+    jobs = list(jobs_cursor)  # Convert cursor to list of documents
 
-    # Return dummy job data as a JSON response
-    return JsonResponse(dummy_jobs, safe=False)
+    # Return the job data as a JSON response
+    return JsonResponse(jobs, safe=False, json_dumps_params={'default': str})   
