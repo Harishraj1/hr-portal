@@ -1,0 +1,208 @@
+{
+    "personalInformation": {
+      "fullName": "John Doe",
+      "contactInformation": {
+        "emailAddress": "john.doe@example.com",
+        "phoneNumber": "+1-234-567-8900",
+        "address": "123 Main St, Anytown, USA",
+        "linkedinProfileURL": "https://www.linkedin.com/in/johndoe",
+        "gitHubUrl": "https://github.com/johndoe"
+      }
+    },
+    "employmentObjectives": {
+      "desiredJobTitle": "Software Engineer",
+      "desiredSalary": {
+        "min": 80000,
+        "max": 100000
+      },
+      "availabilityStartDate": "2024-01-01",
+      "currentEmploymentStatus": "Employed"
+    },
+    "professionalExperience": {
+      "workHistory": [
+        {
+          "companyName": "Tech Solutions Inc",
+          "jobTitle": "Software Engineer",
+          "datesOfEmployment": {
+            "start": "2022-03-01",
+            "end": "Present"
+          },
+          "responsibilitiesAndAchievements": [
+            "Developed and maintained web applications using React and Node.js.",
+            "Improved application performance by 30% through optimization techniques."
+          ]
+        },
+        {
+          "companyName": "Innovative Apps Ltd",
+          "jobTitle": "Junior Developer",
+          "datesOfEmployment": {
+            "start": "2020-06-01",
+            "end": "2022-02-28"
+          },
+          "responsibilitiesAndAchievements": [
+            "Assisted in the development of mobile applications.",
+            "Implemented user interface designs based on user feedback."
+          ]
+        }
+      ],
+      "skills": {
+        "technicalSkills": [
+          {"skill": "JavaScript", "proficiency": "Advanced"},
+          {"skill": "React", "proficiency": "Advanced"},
+          {"skill": "Node.js", "proficiency": "Intermediate"},
+          {"skill": "Python", "proficiency": "Intermediate"}
+        ],
+        "softSkills": [
+          {"skill": "Communication", "proficiency": "Advanced"},
+          {"skill": "Teamwork", "proficiency": "Expert"},
+          {"skill": "Problem Solving", "proficiency": "Advanced"}
+        ]
+      },
+      "projectsPortfolio": {
+        "links": [
+          {"title": "Personal Portfolio", "url": "https://johndoeportfolio.com"}
+        ],
+        "uploads": [
+          {"fileName": "resume.pdf", "fileType": "application/pdf"}
+        ]
+      }
+    },
+    "education": {
+      "educationalBackground": [
+        {
+          "degree": "Bachelor of Science",
+          "major": "Computer Science",
+          "university": "Anytown University",
+          "graduationDate": "2020-05-15",
+          "gpa": 3.8,
+          "courseGrades": {
+            "Data Structures": 95,
+            "Algorithms": 90,
+            "Web Development": 88,
+            "Databases": 92,
+            "Software Engineering": 91
+          }
+        },
+        {
+          "degree": "High School Diploma",
+          "major": "N/A",
+          "university": "Anytown High School",
+          "graduationDate": "2016-06-15",
+          "gpa": 3.5
+        }
+      ],
+      "certifications": [
+        {"name": "AWS Certified Developer", "date": "2023-06-01"},
+        {"name": "Certified ScrumMaster", "date": "2023-01-15"}
+      ]
+    },
+    "personalAttributes": {
+      "coverLetter": "I am a passionate software engineer with a strong background in developing web applications. I am eager to contribute to your team and bring innovative solutions.",
+      "strengths": [
+        "Strong analytical skills",
+        "Excellent communication",
+        "Highly adaptable to new challenges"
+      ],
+      "weaknesses": [
+        "Impatience with slow processes",
+        "Tendency to overthink decisions"
+      ]
+    },
+    "references": [
+      {
+        "name": "Jane Smith",
+        "relationship": "Manager",
+        "contactInformation": {
+          "email": "jane.smith@techsolutions.com",
+          "phone": "+1-234-567-8901"
+        }
+      },
+      {
+        "name": "Robert Brown",
+        "relationship": "Professor",
+        "contactInformation": {
+          "email": "robert.brown@anytown.edu",
+          "phone": "+1-234-567-8902"
+        }
+      }
+    ],
+    "otherInformation": {
+      "languagesSpoken": ["English", "Spanish"],
+      "locationPreferences": ["Remote", "New York", "San Francisco"],
+      "equalOpportunityInformation": {
+        "gender": "Male",
+        "ethnicity": "Hispanic",
+        "disabilityStatus": "None",
+        "veteranStatus": "No"
+      },
+      "legalDisclaimers": {
+        "dataPrivacyAcknowledgement": true,
+        "backgroundCheckAcknowledgement": true
+      }
+    },
+    "visualizationData": {
+      "salaryExpectations": {
+        "desiredSalary": {
+          "min": 80000,
+          "max": 100000
+        }
+      },
+      "employmentTimeline": [
+        {
+          "company": "Innovative Apps Ltd",
+          "position": "Junior Developer",
+          "start": "2020-06-01",
+          "end": "2022-02-28"
+        },
+        {
+          "company": "Tech Solutions Inc",
+          "position": "Software Engineer",
+          "start": "2022-03-01",
+          "end": "Present"
+        }
+      ],
+      "skillProficiency": {
+        "JavaScript": "Advanced",
+        "React": "Advanced",
+        "Node.js": "Intermediate",
+        "Python": "Intermediate",
+        "Communication": "Advanced",
+        "Teamwork": "Expert",
+        "Problem Solving": "Advanced"
+      },
+      "academicPerformance": [
+        {
+          "subject": "Data Structures",
+          "grade": 95
+        },
+        {
+          "subject": "Algorithms",
+          "grade": 90
+        },
+        {
+          "subject": "Web Development",
+          "grade": 88
+        },
+        {
+          "subject": "Databases",
+          "grade": 92
+        },
+        {
+          "subject": "Software Engineering",
+          "grade": 91
+        }
+      ],
+      "languages": ["English", "Spanish"],
+      "certificationTimeline": [
+        {
+          "certification": "AWS Certified Developer",
+          "date": "2023-06-01"
+        },
+        {
+          "certification": "Certified ScrumMaster",
+          "date": "2023-01-15"
+        }
+      ]
+    }
+  }
+  
