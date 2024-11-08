@@ -9,7 +9,6 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import PrivateRoute from './components/PrivateRoute';
 import CandidateVisualisation from './pages/CandidateVisualisation';
-import CandidateDashboard from './pages/CandidateDashboard';
 import Profile from './pages/Profile';
 import Home from './pages/Home';
 import Jobs from './pages/Jobs';
@@ -21,14 +20,13 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/jobs" element={<Jobs />} />
         <Route path="/visualisation" element={<CandidateVisualisation />} />
         <Route path="/jobs" element={<Jobs/>} />
         <Route element={<PrivateRoute />}>
-          <Route path="/" element={<CandidateDashboard />} />
           <Route path="/profile" element={<Profile />} />
-      </Route>
+        </Route>
       </Routes>
     </Router>
   )
