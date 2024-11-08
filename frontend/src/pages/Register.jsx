@@ -141,7 +141,7 @@ const Register = () => {
     };
 
     const handleLogin = () => {
-        navigate('/login    ');
+        navigate('/login');
     };
 
     return (
