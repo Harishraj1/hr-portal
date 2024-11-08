@@ -116,12 +116,12 @@ export default function Jobs() {
         <div>
             <nav className="bg-[#FDC500] flex justify-between items-center w-[100%] text-xl font-semibold py-4 px-10">
                 <div className="flex gap-8">
-                    <p onClick={() => navigate('/home')} className="cursor-pointer hover:text-[#171C3C]">Home</p>
+                    <p onClick={() => navigate('/')} className="cursor-pointer hover:text-[#171C3C]">Home</p>
                     <p onClick={() => navigate('/jobs')}  className="cursor-pointer hover:text-[#171C3C]">Jobs</p>
-                    <p className="cursor-pointer hover:text-[#171C3C]">Profile</p>
+                    <p className="cursor-pointer hover:text-[#171C3C]">Contact us</p>
                 </div>
                 <div>
-                     <p className="cursor-pointer hover:text-[#171C3C]">Contact us</p>
+                     <p onClick={() => navigate('/profile')} className="cursor-pointer hover:text-[#171C3C]">Profile</p>
                 </div>
             </nav>
 

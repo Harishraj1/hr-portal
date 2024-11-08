@@ -1,14 +1,27 @@
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
+    const navigate = useNavigate();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    const navigate = useNavigate(); // Step 1: Initialize navigate
+    useEffect(() => {
+        // Check if user is logged in by looking for access token
+        const token = localStorage.getItem('access_token');
+        setIsLoggedIn(!!token);
+    }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem('access_token');
+        setIsLoggedIn(false);
+        navigate('/');
+    };
 
     // Sample job data - in production this would come from MongoDB
     const jobs = [
         {
             id: 1,
-            title: "Senior Frontend Developer",
+            title: "Senior Frontend Developer", 
             description: "Join our team to build amazing user experiences using React and modern web technologies.",
             location: "Remote",
             type: "Full-time"
@@ -17,7 +30,7 @@ export default function Home() {
             id: 2,
             title: "Backend Engineer",
             description: "Help scale our infrastructure and build robust APIs using Node.js and MongoDB.",
-            location: "New York",
+            location: "New York", 
             type: "Full-time"
         },
         {
@@ -54,12 +67,39 @@ export default function Home() {
         <div>
             <nav className="bg-[#FDC500] flex justify-between items-center w-[100%] text-xl font-semibold py-4 px-10">
                 <div className="flex gap-8">
-                    <p onClick={() => navigate('/home')} className="cursor-pointer hover:text-[#171C3C]">Home</p>
-                    <p onClick={() => navigate('/jobs')} className="cursor-pointer hover:text-[#171C3C]">Jobs</p>
-                    <p className="cursor-pointer hover:text-[#171C3C]">Profile</p>
+                    <p onClick={() => navigate('/')} className="cursor-pointer hover:text-[#171C3C]">Home</p>
+                    <p onClick={() => isLoggedIn ? navigate('/jobs') : navigate('/login')} className="cursor-pointer hover:text-[#171C3C]">Jobs</p>
+                    {isLoggedIn && (
+                            <p className="cursor-pointer hover:text-[#171C3C]">Contact us</p>
+                    )}
                 </div>
-                <div>
-                    <p className="cursor-pointer hover:text-[#171C3C]">Contact us</p>
+                <div className="flex gap-4">
+                    {isLoggedIn ? (
+                        <>
+                            <p onClick={() => navigate('/profile')} className="cursor-pointer hover:text-[#171C3C]">Profile</p>
+                            <button 
+                                onClick={handleLogout}
+                                className="bg-[#171C3C] text-white px-4 py-1 rounded hover:bg-[#2a305e] transition duration-300"
+                            >
+                                Logout
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <button 
+                                onClick={() => navigate('/login')} 
+                                className="bg-[#171C3C] text-white px-4 py-1 rounded hover:bg-[#2a305e] transition duration-300"
+                            >
+                                Login
+                            </button>
+                            <button 
+                                onClick={() => navigate('/register')}
+                                className="bg-white text-[#171C3C] px-4 py-1 rounded hover:bg-gray-100 transition duration-300"
+                            >
+                                Sign Up
+                            </button>
+                        </>
+                    )}
                 </div>
             </nav>
 
@@ -147,7 +187,9 @@ export default function Home() {
                                     <span className="text-sm bg-gray-100 text-gray-600 px-3 py-1 rounded-full mr-2">{job.location}</span>
                                     <span className="text-sm bg-gray-100 text-gray-600 px-3 py-1 rounded-full">{job.type}</span>
                                 </div>
-                                <button className="bg-[#FDC500] text-[#171C3C] px-4 py-2 rounded font-semibold hover:bg-[#171C3C] hover:text-white transition duration-300">
+                                <button 
+                                    onClick={() => !isLoggedIn && navigate('/login')}
+                                    className="bg-[#FDC500] text-[#171C3C] px-4 py-2 rounded font-semibold hover:bg-[#171C3C] hover:text-white transition duration-300">
                                     Apply Now
                                 </button>
                             </div>
@@ -156,7 +198,7 @@ export default function Home() {
                 </div>
                 <div className="text-center">
                     <button
-                        onClick={() => navigate('/jobs')} // Step 3: Navigate to '/jobs' route
+                        onClick={() => isLoggedIn ? navigate('/jobs') : navigate('/login')}
                         className="bg-[#171C3C] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#FDC500] hover:text-[#171C3C] transition duration-300">
                         View More Jobs
                     </button>
