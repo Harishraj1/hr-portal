@@ -24,7 +24,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/jobs" element={<Jobs />} />
         <Route path="/visualisation" element={<CandidateVisualisation />} />
-        {/* <Route path="/jobs" element={<Jobs/>} /> */}
+        <Route path="/jobs" element={<Jobs/>} />
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<CandidateDashboard />} />
           <Route path="/profile" element={<Profile />} />
