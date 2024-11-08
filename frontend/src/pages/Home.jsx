@@ -1,14 +1,29 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { baseURL } from '../components/utils';
+import axios from 'axios';
 
 export default function Home() {
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [jobs, setJobs] = useState([]); // State to store fetched job data
 
     useEffect(() => {
         // Check if user is logged in by looking for access token
         const token = localStorage.getItem('access_token');
         setIsLoggedIn(!!token);
+
+        // Fetch jobs data from API
+        const fetchJobs = async () => {
+            try {
+                const response = await axios.get(`${baseURL}/accounts/jobs/recent`); // API endpoint to fetch jobs
+                setJobs(response.data); // Set fetched jobs data
+            } catch (error) {
+                console.error('Error fetching jobs:', error);
+            }
+        };
+
+        fetchJobs();
     }, []);
 
     const handleLogout = () => {
@@ -18,50 +33,50 @@ export default function Home() {
     };
 
     // Sample job data - in production this would come from MongoDB
-    const jobs = [
-        {
-            id: 1,
-            title: "Senior Frontend Developer", 
-            description: "Join our team to build amazing user experiences using React and modern web technologies.",
-            location: "Remote",
-            type: "Full-time"
-        },
-        {
-            id: 2,
-            title: "Backend Engineer",
-            description: "Help scale our infrastructure and build robust APIs using Node.js and MongoDB.",
-            location: "New York", 
-            type: "Full-time"
-        },
-        {
-            id: 3,
-            title: "UI/UX Designer",
-            description: "Create beautiful and intuitive designs for our web and mobile applications.",
-            location: "San Francisco",
-            type: "Contract"
-        },
-        {
-            id: 4,
-            title: "DevOps Engineer",
-            description: "Manage our cloud infrastructure and implement CI/CD pipelines.",
-            location: "Remote",
-            type: "Full-time"
-        },
-        {
-            id: 5,
-            title: "Product Manager",
-            description: "Drive product strategy and work closely with engineering teams.",
-            location: "Boston",
-            type: "Full-time"
-        },
-        {
-            id: 6,
-            title: "Mobile Developer",
-            description: "Build native mobile applications for iOS and Android platforms.",
-            location: "Seattle",
-            type: "Full-time"
-        }
-    ];
+    // const jobs = [
+    //     {
+    //         id: 1,
+    //         title: "Senior Frontend Developer",
+    //         description: "Join our team to build amazing user experiences using React and modern web technologies.",
+    //         location: "Remote",
+    //         type: "Full-time"
+    //     },
+    //     {
+    //         id: 2,
+    //         title: "Backend Engineer",
+    //         description: "Help scale our infrastructure and build robust APIs using Node.js and MongoDB.",
+    //         location: "New York",
+    //         type: "Full-time"
+    //     },
+    //     {
+    //         id: 3,
+    //         title: "UI/UX Designer",
+    //         description: "Create beautiful and intuitive designs for our web and mobile applications.",
+    //         location: "San Francisco",
+    //         type: "Contract"
+    //     },
+    //     {
+    //         id: 4,
+    //         title: "DevOps Engineer",
+    //         description: "Manage our cloud infrastructure and implement CI/CD pipelines.",
+    //         location: "Remote",
+    //         type: "Full-time"
+    //     },
+    //     {
+    //         id: 5,
+    //         title: "Product Manager",
+    //         description: "Drive product strategy and work closely with engineering teams.",
+    //         location: "Boston",
+    //         type: "Full-time"
+    //     },
+    //     {
+    //         id: 6,
+    //         title: "Mobile Developer",
+    //         description: "Build native mobile applications for iOS and Android platforms.",
+    //         location: "Seattle",
+    //         type: "Full-time"
+    //     }
+    // ];
 
     return (
         <div>
@@ -70,14 +85,14 @@ export default function Home() {
                     <p onClick={() => navigate('/')} className="cursor-pointer hover:text-[#171C3C]">Home</p>
                     <p onClick={() => isLoggedIn ? navigate('/jobs') : navigate('/login')} className="cursor-pointer hover:text-[#171C3C]">Jobs</p>
                     {isLoggedIn && (
-                            <p className="cursor-pointer hover:text-[#171C3C]">Contact us</p>
+                        <p className="cursor-pointer hover:text-[#171C3C]">Contact us</p>
                     )}
                 </div>
                 <div className="flex gap-4">
                     {isLoggedIn ? (
                         <>
                             <p onClick={() => navigate('/profile')} className="cursor-pointer hover:text-[#171C3C]">Profile</p>
-                            <button 
+                            <button
                                 onClick={handleLogout}
                                 className="bg-[#171C3C] text-white px-4 py-1 rounded hover:bg-[#2a305e] transition duration-300"
                             >
@@ -86,13 +101,13 @@ export default function Home() {
                         </>
                     ) : (
                         <>
-                            <button 
-                                onClick={() => navigate('/login')} 
+                            <button
+                                onClick={() => navigate('/login')}
                                 className="bg-[#171C3C] text-white px-4 py-1 rounded hover:bg-[#2a305e] transition duration-300"
                             >
                                 Login
                             </button>
-                            <button 
+                            <button
                                 onClick={() => navigate('/register')}
                                 className="bg-white text-[#171C3C] px-4 py-1 rounded hover:bg-gray-100 transition duration-300"
                             >
@@ -174,22 +189,33 @@ export default function Home() {
                 </div>
             </div>
 
-            {/* job listings */}
-            <div className="bg-gray-50 py-16 px-32">
+            {/* Updated Job Listings Section */}
+            {/* <div className="bg-gray-50 py-16 px-10">
                 <h2 className="text-4xl font-bold text-[#171C3C] text-center mb-12">Recent Jobs</h2>
-                <div className="grid grid-cols-3 gap-6 mb-10">
-                    {jobs.map(job => (
-                        <div key={job.id} className="bg-white p-6 rounded-lg py-10 shadow-md hover:shadow-xl transition duration-300">
-                            <h3 className="text-xl font-bold text-[#171C3C] mb-3">{job.title}</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-10">
+                    {jobs.map((job) => (
+                        <div
+                            key={job.id}
+                            className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 relative"
+                        >
+                            <div className="flex justify-between items-center mb-3">
+                                <h3 className="text-xl font-bold text-[#171C3C]">{job.title}</h3>
+                                <span
+                                    className={`text-xs font-semibold px-2 py-1 rounded-full ${job.type === "Full-time" ? "bg-green-100 text-green-600" : "bg-yellow-100 text-yellow-600"
+                                        }`}
+                                >
+                                    {job.type}
+                                </span>
+                            </div>
                             <p className="text-gray-600 mb-4">{job.description}</p>
-                            <div className="flex justify-between items-center">
-                                <div>
-                                    <span className="text-sm bg-gray-100 text-gray-600 px-3 py-1 rounded-full mr-2">{job.location}</span>
-                                    <span className="text-sm bg-gray-100 text-gray-600 px-3 py-1 rounded-full">{job.type}</span>
-                                </div>
-                                <button 
+                            <div className="flex justify-between items-center mt-4">
+                                <span className="text-sm bg-gray-100 text-gray-600 px-3 py-1 rounded-full">
+                                    {job.location}
+                                </span>
+                                <button
                                     onClick={() => !isLoggedIn && navigate('/login')}
-                                    className="bg-[#FDC500] text-[#171C3C] px-4 py-2 rounded font-semibold hover:bg-[#171C3C] hover:text-white transition duration-300">
+                                    className="bg-[#FDC500] text-[#171C3C] px-4 py-2 rounded font-semibold hover:bg-[#171C3C] hover:text-white transition duration-300"
+                                >
                                     Apply Now
                                 </button>
                             </div>
@@ -199,11 +225,47 @@ export default function Home() {
                 <div className="text-center">
                     <button
                         onClick={() => isLoggedIn ? navigate('/jobs') : navigate('/login')}
+                        className="bg-[#171C3C] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#FDC500] hover:text-[#171C3C] transition duration-300"
+                    >
+                        View More Jobs
+                    </button>
+                </div>
+            </div> */}
+            {/* Job Listings Section */}
+            <div className="bg-gray-50 py-16 px-32">
+                <h2 className="text-4xl font-bold text-[#171C3C] text-center mb-12">Recent Jobs</h2>
+                <div className="grid grid-cols-3 gap-6 mb-10">
+                    {jobs.length > 0 ? (
+                        jobs.map(job => (
+                            <div key={job.id} className="bg-white p-6 rounded-lg py-10 shadow-md hover:shadow-xl transition duration-300">
+                                <h3 className="text-xl font-bold text-[#171C3C] mb-3">{job.title}</h3>
+                                <p className="text-gray-600 mb-4">{job.description}</p>
+                                <div className="flex justify-between items-center">
+                                    <div>
+                                        <span className="text-sm bg-gray-100 text-gray-600 px-3 py-1 rounded-full mr-2">{job.location}</span>
+                                        <span className="text-sm bg-gray-100 text-gray-600 px-3 py-1 rounded-full">{job.type}</span>
+                                    </div>
+                                    <button
+                                        onClick={() => !isLoggedIn && navigate('/login')}
+                                        className="bg-[#FDC500] text-[#171C3C] px-4 py-2 rounded font-semibold hover:bg-[#171C3C] hover:text-white transition duration-300">
+                                        Apply Now
+                                    </button>
+                                </div>
+                            </div>
+                        ))
+                    ) : (
+                        <p className="text-center text-gray-500">No jobs available at the moment. Check back later!</p>
+                    )}
+                </div>
+                <div className="text-center">
+                    <button
+                        onClick={() => isLoggedIn ? navigate('/jobs') : navigate('/login')}
                         className="bg-[#171C3C] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#FDC500] hover:text-[#171C3C] transition duration-300">
                         View More Jobs
                     </button>
                 </div>
             </div>
+
 
             {/* why this app */}
             <div className="text-center py-24 px-10">
